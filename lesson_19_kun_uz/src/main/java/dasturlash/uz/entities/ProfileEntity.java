@@ -21,18 +21,19 @@ public class ProfileEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @Column
+    @Column(name = "name", nullable = false)
     private String name;
-    @Column
+    @Column(name = "surname", nullable = false)
     private String surname;
-    @Column
+    @Column(name = " username", nullable = false)
     private String username;   //email / phone
-    @Column
+    @Column(name = "password", nullable = false)
     private String password;
+    @Column(name = "visible", nullable = false)
+    private Boolean visible = true;
 
     @Enumerated(EnumType.STRING)
-    private ProfileStatus status;
+    private ProfileStatus status = ProfileStatus.ACTIVE;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)

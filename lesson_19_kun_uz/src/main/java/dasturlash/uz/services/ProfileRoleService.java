@@ -1,5 +1,6 @@
 package dasturlash.uz.services;
 
+import dasturlash.uz.entities.ProfileEntity;
 import dasturlash.uz.enums.ProfileRole;
 import dasturlash.uz.repositories.ProfileRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class ProfileRoleService {
 
     public void create(Integer profileId, List<ProfileRole> rolesList) {
         for (ProfileRole role : rolesList) {
+            ProfileEntity entity = new ProfileEntity();
+            entity.setId(profileId);
 
         }
 
