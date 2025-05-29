@@ -19,33 +19,33 @@ public class ProfileService {
     @Autowired
     private ProfileRepository profileRepository;
 
-    public ProfileDTO create(ProfileDTO dto) {
-        Optional<ProfileEntity> existingProfile = profileRepository.findByUsername(dto.getUsername());
+    public ProfileDTO create(ProfileDTO profile) {
+        Optional<ProfileEntity> existingProfile = profileRepository.findByUsername(profile.getUsername());
         if (existingProfile.isPresent()) {
             throw new AppBadException("Username already exists");
         }
 
 
-        for (ProfileRole role : dto.getRoleList()) {
+        for (ProfileRole role : profile.getRoleList()) {
             if (role != ProfileRole.ROLE_MODERATOR && role != ProfileRole.ROLE_PUBLISHER) {
                 throw new AppBadException("Only MODERATOR or PUBLISHER roles are allowed");
             }
         }
 
         ProfileEntity entity = new ProfileEntity();
-        entity.setName(dto.getName());
-        entity.setSurname(dto.getSurname());
-        entity.setUsername(dto.getUsername());
-        entity.setPassword(String.valueOf(dto.getPassword())); // Parolni ochiq saqlash (xavfsiz emas)
-        entity.setRoleList(dto.getRoleList());
+        entity.setName(profile.getName());
+        entity.setSurname(profile.getSurname());
+        entity.setUsername(profile.getUsername());
+        entity.setPassword(String.valueOf(profile.getPassword())); // Parolni ochiq saqlash (xavfsiz emas)
+        entity.setRoleList(profile.getRoleList());
         entity.setCreatedDate(LocalDateTime.now());
 
         profileRepository.save(entity);
 
         // DTO'ni qaytaramiz
-        dto.setId(entity.getId());
-        dto.setCreatedDate(entity.getCreatedDate());
-        return dto;
+        profile.setId(entity.getId());
+        profile.setCreatedDate(entity.getCreatedDate());
+        return profile;
     }
 
     public ProfileDTO update(Integer id, ProfileDTO dto) {

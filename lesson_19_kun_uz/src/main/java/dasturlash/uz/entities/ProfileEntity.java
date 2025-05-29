@@ -23,14 +23,21 @@ public class ProfileEntity {
     private Integer id;
     @Column(name = "name", nullable = false)
     private String name;
+
     @Column(name = "surname", nullable = false)
     private String surname;
+
     @Column(name = " username", nullable = false)
-    private String username;   //email / phone
+    private String username;
+    //email / phone
     @Column(name = "password", nullable = false)
     private String password;
+
     @Column(name = "visible", nullable = false)
     private Boolean visible = true;
+
+    @Column(name = "photo_id")
+    private String photoId;
 
     @Enumerated(EnumType.STRING)
     private ProfileStatus status = ProfileStatus.ACTIVE;

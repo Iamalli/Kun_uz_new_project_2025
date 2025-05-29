@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface ProfileRepository extends CrudRepository<ProfileEntity, Integer> {
+public interface  ProfileRepository extends CrudRepository<ProfileEntity, Integer> {
 
     Optional<ProfileEntity> findById(Integer id);
 
@@ -14,6 +14,6 @@ public interface ProfileRepository extends CrudRepository<ProfileEntity, Integer
 //    @Query("update ProfileEntity set visible = false where id = ?1")
 //    int updateVisibleById(Integer id);
 
-
+// where username = ? and visible  = true
     Optional<ProfileEntity> findByUsername(String username);
 }
