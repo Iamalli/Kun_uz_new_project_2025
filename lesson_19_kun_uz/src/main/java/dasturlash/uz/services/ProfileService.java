@@ -26,25 +26,24 @@ public class ProfileService {
         }
 
 
-        for (ProfileRole role : profile.getRoleList()) {
+     /*   for (ProfileRole role : profile.getRoleList()) {
             if (role != ProfileRole.ROLE_MODERATOR && role != ProfileRole.ROLE_PUBLISHER) {
                 throw new AppBadException("Only MODERATOR or PUBLISHER roles are allowed");
             }
         }
-
+*/
         ProfileEntity entity = new ProfileEntity();
         entity.setName(profile.getName());
         entity.setSurname(profile.getSurname());
         entity.setUsername(profile.getUsername());
         entity.setPassword(String.valueOf(profile.getPassword())); // Parolni ochiq saqlash (xavfsiz emas)
-        entity.setRoleList(profile.getRoleList());
-        entity.setCreatedDate(LocalDateTime.now());
+        entity.setVisible(true);
+        entity.setStatus(ProfileStatus.ACTIVE);
 
         profileRepository.save(entity);
 
         // DTO'ni qaytaramiz
         profile.setId(entity.getId());
-        profile.setCreatedDate(entity.getCreatedDate());
         return profile;
     }
 
@@ -58,13 +57,12 @@ public class ProfileService {
         entity.setName(dto.getName());
         entity.setSurname(dto.getSurname());
         entity.setUsername(dto.getUsername());
-        entity.setPassword(String.valueOf(dto.getPassword())); // Parolni ochiq ko‘rinishda o‘zgartiradi
-        entity.setRoleList(dto.getRoleList());
+       /* entity.setPassword(String.valueOf(dto.getPassword())); */// Parolni ochiq ko‘rinishda o‘zgartiradi
+
 
         profileRepository.save(entity);
 
         dto.setId(entity.getId());
-        dto.setCreatedDate(entity.getCreatedDate());
         return dto;
     }
 
@@ -84,8 +82,6 @@ public class ProfileService {
             dto.setName(entity.getName());
             dto.setSurname(entity.getSurname());
             dto.setUsername(entity.getUsername());
-            dto.setRoleList(entity.getRoleList());
-            dto.setCreatedDate(entity.getCreatedDate());
             return dto;
         }).toList();
     }
